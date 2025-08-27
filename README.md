@@ -3,6 +3,13 @@ Because there is no option in the BIOS of the "Thinkpad" X12 to switch the FN-Ke
 
 This quickly put together repo contains the c-code to send the packet. Someone might find it useful (in my research I only found someone posting the captured packet, which at least sent me on the correct path).
 
+- [Prerequisites](#prerequisites)
+- [How To](#how-to)
+- [Making the Fn Key Remap Persistent](#Making-the-Fn-Key-Remap-Persistent)
+  - [Quick Install](#quick-install)
+  - [Manual Install](#manual-install)
+- [Disclaimer](#disclaimer)
+
 ## Prerequisites
 Prerequisites
 
@@ -59,13 +66,13 @@ Your Fn and Ctrl keys should now be swapped
 Note that the quick install uses a python venv for to install pyusb, so this should work on immutable distros like Fedora Silverblue, Universal Blue variants, etc.
 
 ```
-curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/install.sh | sh
+curl -L https://github.com/manueljaeckle/thinkpad_x12_fn_switcher/raw/main/install.sh | sh
 ```
 
 To uninstall, run:
 
 ```
-curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/uninstall.sh | sh
+curl -L https://github.com/manueljaeckle/thinkpad_x12_fn_switcher/raw/main/uninstall.sh | sh
 ```
 
 ## Manual Install

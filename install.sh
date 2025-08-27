@@ -14,7 +14,7 @@ cd $INSTALL_LOCATION
 
 echo "Downloading files to $INSTALL_LOCATION..."
 
-git clone --depth=1 https://github.com/aarron-lee/thinkpad_x12_fn_switcher.git
+git clone --depth=1 https://github.com/manueljaeckle/thinkpad_x12_fn_switcher.git
 
 echo "Initializing python venv..."
 
@@ -45,11 +45,10 @@ EOF
 
 sudo mv ./99-thinkpad-fn.rules /etc/udev/rules.d/99-thinkpad-fn.rules
 
+# handle for SE linux
 sudo chcon -u system_u -r object_r --type=bin_t $RUN_SCRIPT
 
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
-echo "Install complete. Manually running script once since the script only runs when it's connected to the device"
-
-./$RUN_SCRIPT
+echo "Install complete."
