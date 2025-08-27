@@ -45,11 +45,12 @@ EOF
 
 sudo mv ./99-thinkpad-fn.rules /etc/udev/rules.d/99-thinkpad-fn.rules
 
+# handle for SE linux
 sudo chcon -u system_u -r object_r --type=bin_t $RUN_SCRIPT
 
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
-echo "Install complete. Manually running script once since the script only runs when it's connected to the device"
+echo "Install complete. Manually running script once since the script only runs when the keyboard is connected"
 
 ./$RUN_SCRIPT

@@ -3,6 +3,13 @@ Because there is no option in the BIOS of the "Thinkpad" X12 to switch the FN-Ke
 
 This quickly put together repo contains the c-code to send the packet. Someone might find it useful (in my research I only found someone posting the captured packet, which at least sent me on the correct path).
 
+- [Prerequisites](#prerequisites)
+- [How To](#how-to)
+- [Making the Fn Key Remap Persistent](#Making-the-Fn-Key-Remap-Persistent)
+  - [Quick Install](#quick-install)
+  - [Manual Install](#manual-install)
+- [Disclaimer](#disclaimer)
+
 ## Prerequisites
 Prerequisites
 
