@@ -51,8 +51,24 @@ Your Fn and Ctrl keys should now be swapped
 
 
 
-### Making the Fn Key Remap Persistent 
+### Making the Fn Key Remap Persistent
 (this section is copy pasted from ChatGPT but verified and with small adjustements)
+
+## Quick install
+
+Note that the quick install uses a python venv for to install pyusb, so this should work on immutable distros like Fedora Silverblue, Universal Blue variants, etc.
+
+```
+curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/install.sh | sh
+```
+
+To uninstall, run:
+
+```
+curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/uninstall.sh | sh
+```
+
+## Manual Install
 
 By default, the Fn key remapping resets after unplugging the keyboard or rebooting. To make the remap permanent, we use udev rules to trigger the remapping program (x12_fn_switcher) whenever the keyboard is connected.
 📂 Step 1: Copy the Program to the Correct Location
