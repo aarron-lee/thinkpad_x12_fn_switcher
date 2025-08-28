@@ -3,10 +3,10 @@
 #include <libusb-1.0/libusb.h>
 
 #define VENDOR_ID  0x17ef  // Your VID
-#define PRODUCT_ID 0x60fe  // Your PID
+#define PRODUCT_ID 0x060fe  // Your PID
 #define HID_REQUEST_SET_REPORT 0x09
 #define HID_REPORT_TYPE_OUTPUT 0x02
-#define INTERFACE 1 
+#define INTERFACE 1
 #define TIMEOUT 5000
 
 int main() {
@@ -43,7 +43,7 @@ int main() {
                                   HID_REQUEST_SET_REPORT,
                                   (HID_REPORT_TYPE_OUTPUT << 8) | data[0],
                                   INTERFACE, data, sizeof(data), TIMEOUT);
-    
+
     if (res < 0) {
         fprintf(stderr, "Error while sending: %s\n", libusb_error_name(res));
     } else {
