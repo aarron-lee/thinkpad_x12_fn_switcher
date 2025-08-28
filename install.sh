@@ -16,6 +16,8 @@ echo "Downloading files to $INSTALL_LOCATION..."
 
 git clone --depth=1 https://github.com/aarron-lee/thinkpad_x12_fn_switcher.git
 
+cd thinkpad_x12_fn_switcher && git checkout device_reset && cd ..
+
 echo "Initializing python venv..."
 
 python -m venv --system-site-packages venv
