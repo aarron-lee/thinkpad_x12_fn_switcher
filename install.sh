@@ -51,6 +51,4 @@ sudo chcon -u system_u -r object_r --type=bin_t $RUN_SCRIPT
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 
-echo "Install complete. Manually running script once since the script only runs when the keyboard is connected"
-
-./$RUN_SCRIPT
+echo "Install complete."
