@@ -64,11 +64,12 @@ except usb.core.USBError as e:
 finally:
     # Reattach kernel driver if it was detached
     if device.is_kernel_driver_active(INTERFACE) is False:
-        try:
-            device.attach_kernel_driver(INTERFACE)
-            sys.stdout.write("Re-attached kernel driver\n")
-        except usb.core.USBError as e:
-            sys.stderr.write(f"Could not re-attach kernel driver: {e}\n")
+        device.reset()
+        # try:
+        #     device.attach_kernel_driver(INTERFACE)
+        #     sys.stdout.write("Re-attached kernel driver\n")
+        # except usb.core.USBError as e:
+        #     sys.stderr.write(f"Could not re-attach kernel driver: {e}\n")
 
     # The device object will be closed automatically when it goes out of scope.
     # However, you can also explicitly call: usb.util.dispose_resources(device)
