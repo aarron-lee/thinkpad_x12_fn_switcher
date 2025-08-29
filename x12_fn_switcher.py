@@ -1,74 +1,60 @@
-import usb.core
-import usb.util
-import sys
-from time import sleep
+import thinkpad_hid as hid
 
-# converted from c to python via Google Gemini, with some minor manual edits to make it fully functional
+VENDOR_ID = 0x17ef
+PRODUCT_ID = 0x60fe
+INTERFACE_NUMBER = 1
+USAGE_PAGE = 1
+USAGE = 2
 
-# Constants
-VENDOR_ID = 0x17ef  # Your VID
-PRODUCT_ID = 0x60fe  # Your PID
-HID_REQUEST_SET_REPORT = 0x09
-HID_REPORT_TYPE_OUTPUT = 0x02
-INTERFACE = 1
-TIMEOUT = 5000
+# {'path': b'/dev/hidraw2',
+# 'vendor_id': 6127,
+# 'product_id': 24830,
+# 'serial_number': '',
+# 'release_number': 13113,
+# 'manufacturer_string': 'Darfon',
+# 'product_string': 'Thinkpad X12 Detachable Gen 1 Folio case -1',
+# 'usage_page': 1,
+# 'usage': 2,
+# 'interface_number': 1,
+# 'bus_type': <BusType.USB: 1>}
 
-# Find the device
-device = usb.core.find(idVendor=VENDOR_ID, idProduct=PRODUCT_ID)
-
-if device is None:
-    sys.exit("Error: Keyboard not found")
-
-try:
-    # Check if a kernel driver is active and detach it
-    if device.is_kernel_driver_active(INTERFACE):
-        sys.stdout.write("Detaching kernel driver...\n")
-        device.detach_kernel_driver(INTERFACE)
-
-    sleep(1)
-
-    # Set the active configuration. The first one is usually what you want.
-    # sys.stdout.write("Setting configuration...\n")
-    # device.set_configuration()
-
-    # Data from Wireshark (Toggle Fn key)
-    data = bytes([0x09, 0xb4, 0x02])
-
-    # Send USB Control Transfer
-    sys.stdout.write("Sending SET_REPORT Control Transfer with wIndex=1...\n")
-
-    # libusb_control_transfer in Python equivalent
-    # bmRequestType: LIBUSB_REQUEST_TYPE_CLASS | LIBUSB_RECIPIENT_INTERFACE
-    # 0x20 | 0x01 = 0x21
-    # bRequest: HID_REQUEST_SET_REPORT (0x09)
-    # wValue: (HID_REPORT_TYPE_OUTPUT << 8) | data[0] -> (0x02 << 8) | 0x09 = 0x0209
-    # wIndex: INTERFACE (1)
-    # data: data
-    # timeout: TIMEOUT
-    sys.stdout.write("ctrl transfer...\n")
-
-    bytes_sent = device.ctrl_transfer(
-        bmRequestType=0x21,
-        bRequest=HID_REQUEST_SET_REPORT,
-        wValue=(HID_REPORT_TYPE_OUTPUT << 8) | data[0],
-        wIndex=INTERFACE,
-        data_or_wLength=data,
-        timeout=TIMEOUT
+def is_x12_keyboard(dev):
+    return (dev['product_id'] == PRODUCT_ID
+        and dev['usage'] == USAGE
+        and dev['usage_page'] == USAGE_PAGE
+        and dev['interface_number'] == INTERFACE_NUMBER
     )
 
-    sys.stdout.write(f"Control Transfer successfully sent ({bytes_sent} bytes)\n")
+def main():
+    # The data to be sent, including the Report ID (0x09).
+    # The first byte is the Report ID.
+    data = [0x09, 0xb4, 0x02]
 
-except usb.core.USBError as e:
-    sys.stderr.write(f"Error while sending: {e}\n")
+    try:
+        hid_device = None
 
-finally:
-    # Reattach kernel driver if it was detached
-    if device.is_kernel_driver_active(INTERFACE) is False:
-        try:
-            device.attach_kernel_driver(INTERFACE)
-            sys.stdout.write("Re-attached kernel driver\n")
-        except usb.core.USBError as e:
-            sys.stderr.write(f"Could not re-attach kernel driver: {e}\n")
+        print("Searching for HID device with VID: 0x{:04x}, PID: 0x{:04x}".format(VENDOR_ID, PRODUCT_ID))
+        for dev in hid.enumerate(VENDOR_ID):
+            if is_x12_keyboard(dev):
+                hid_device = hid.Device(path=dev['path'])
+                break
+        if hid_device:
+            print("Device Found. Writing data: {}".format([hex(d) for d in data]))
 
-    # The device object will be closed automatically when it goes out of scope.
-    # However, you can also explicitly call: usb.util.dispose_resources(device)
+            hid_device.nonblocking = 1
+
+            print(f"Sending feature report with data: {[hex(d) for d in data]}")
+            bytes_written = hid_device.write(bytes(data))
+
+            hid_device.close()
+            print(f"{bytes_written} bytes written to device successfully. Exiting.")
+        else:
+            print("Device not found. Exiting...")
+
+    except IOError as e:
+        print("Error: {}".format(e))
+        print("Could not open the device. Make sure the correct VENDOR_ID and PRODUCT_ID are set,")
+        print("and that you have the necessary permissions to access the device (e.g., as root).")
+
+if __name__ == "__main__":
+    main()

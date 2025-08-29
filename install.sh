@@ -16,22 +16,10 @@ echo "Downloading files to $INSTALL_LOCATION..."
 
 git clone --depth=1 https://github.com/aarron-lee/thinkpad_x12_fn_switcher.git
 
-echo "Initializing python venv..."
-
-python -m venv --system-site-packages venv
-
-source ./venv/bin/activate
-
-echo "pip install pyusb dependency..."
-
-pip install pyusb
-
-PYTHON_COMMAND=$INSTALL_LOCATION/venv/bin/python3
-
 cat << EOF > "$RUN_SCRIPT"
 #!/usr/bin/bash
 
-$PYTHON_COMMAND $INSTALL_LOCATION/thinkpad_x12_fn_switcher/x12_fn_switcher.py
+python3 $INSTALL_LOCATION/thinkpad_x12_fn_switcher/x12_fn_switcher.py
 EOF
 
 chmod +x $RUN_SCRIPT

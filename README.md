@@ -63,7 +63,7 @@ Your Fn and Ctrl keys should now be swapped
 
 ## Quick install
 
-Note that the quick install uses a python venv for to install pyusb, so this should work on immutable distros like Fedora Silverblue, Universal Blue variants, etc.
+Note that the quick install uses python and all dependencies are provided, so this should work on immutable distros like Fedora Silverblue, Universal Blue variants, etc.
 
 ```
 curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/install.sh | sh
@@ -138,3 +138,7 @@ sudo udevadm trigger
 ChatGPT helped me with the c stuff as I am not very familiar with hid and usb.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND...
+
+## Attribution
+
+Vendored dependency: https://github.com/apmorton/pyhidapi
