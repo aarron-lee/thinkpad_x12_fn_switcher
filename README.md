@@ -66,13 +66,13 @@ Your Fn and Ctrl keys should now be swapped
 Note that the quick install uses python and all dependencies are provided, so this should work on immutable distros like Fedora Silverblue, Universal Blue variants, etc.
 
 ```
-curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/install.sh | sh
+curl -L https://github.com/manueljaeckle/thinkpad_x12_fn_switcher/raw/main/install.sh | sh
 ```
 
 To uninstall, run:
 
 ```
-curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/uninstall.sh | sh
+curl -L https://github.com/manueljaeckle/thinkpad_x12_fn_switcher/raw/main/uninstall.sh | sh
 ```
 
 ## Manual Install

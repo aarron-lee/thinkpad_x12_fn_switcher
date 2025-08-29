@@ -14,7 +14,7 @@ cd $INSTALL_LOCATION
 
 echo "Downloading files to $INSTALL_LOCATION..."
 
-git clone --depth=1 https://github.com/aarron-lee/thinkpad_x12_fn_switcher.git
+git clone --depth=1 https://github.com/manueljaeckle/thinkpad_x12_fn_switcher.git
 
 cat << EOF > "$RUN_SCRIPT"
 #!/usr/bin/bash

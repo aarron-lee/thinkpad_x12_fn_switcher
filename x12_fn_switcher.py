@@ -42,8 +42,6 @@ def main():
             print("Device Found. Writing data: {}".format([hex(d) for d in data]))
 
             hid_device.nonblocking = 1
-
-            print(f"Sending feature report with data: {[hex(d) for d in data]}")
             bytes_written = hid_device.write(bytes(data))
 
             hid_device.close()
