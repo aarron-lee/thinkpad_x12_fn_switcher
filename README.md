@@ -1,9 +1,6 @@
-# Thinkpad x12 FN Switcher for Linux
-
-Big thanks to [manueljaeckle](https://github.com/manueljaeckle/thinkpad_x12_fn_switcher) for the initial implementation
+# Thinkpad x12 detachable gen 1 FN Switcher for Linux
 
 - [Quick Install](#quick-install)
-- [Manual Install](#manual-install)
 - [Disclaimer](#disclaimer)
 - [Attribution](#attribution)
 
@@ -26,6 +23,8 @@ curl -L https://github.com/aarron-lee/thinkpad_x12_fn_switcher/raw/main/uninstal
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND...
 
 ## Attribution
+
+Big thanks to upstream [manueljaeckle](https://github.com/manueljaeckle/thinkpad_x12_fn_switcher) for the initial implementation
 
 Vendored dependency: https://github.com/apmorton/pyhidapi
 
