@@ -5,3 +5,5 @@ sudo rm -rf /etc/udev/rules.d/99-thinkpad-fn.rules
 
 sudo udevadm control --reload-rules
 sudo udevadm trigger
+
+echo "uninstall complete"
