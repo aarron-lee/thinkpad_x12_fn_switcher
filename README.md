@@ -1,5 +1,7 @@
 # Thinkpad x12 detachable gen 1 FN Switcher for Linux
 
+This switches the `fn` and left `ctrl` keys on the x12 Detachable gen 1 keyboard accessory via systemd service
+
 - [Quick Install](#quick-install)
 - [Disclaimer](#disclaimer)
 - [Attribution](#attribution)
