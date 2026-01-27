@@ -28,7 +28,7 @@ chmod +x $RUN_SCRIPT
 sudo rm -rf /etc/udev/rules.d/99-thinkpad-fn.rules
 
 cat <<EOF >> "./99-thinkpad-fn.rules"
-ACTION=="add", ATTRS{idVendor}=="17ef", ATTRS{idProduct}=="60fe", RUN+="$RUN_SCRIPT"
+ACTION=="add", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTRS{idVendor}=="17ef", ATTRS{idProduct}=="60fe", RUN+="$RUN_SCRIPT"
 EOF
 
 sudo mv ./99-thinkpad-fn.rules /etc/udev/rules.d/99-thinkpad-fn.rules
